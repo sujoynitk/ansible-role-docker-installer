@@ -1,0 +1,29 @@
+---
+
+- name: "Installing Docker Prerequisite packages"
+  yum:
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - yum-utils
+    - device-mapper-persistent-data
+    - lvm2
+    - amazon-linux-extras
+
+#- name: "Configuring docker-ce repo"
+#  get_url:
+#   url: https://download.docker.com/linux/centos/docker-ce.repo
+#   dest: /etc/yum.repos.d/docker-ce.repo
+#   mode: 0644
+
+- name: Enable extras
+  shell: yum-config-manager --enable extras---
+
+- name: Install docker via amazon-linux-extras packages
+# shell: pip install docker docker-py
+  shell: "amazon-linux-extras install docker -y"
+
+#- name: " Installing Docker latest version"
+#  yum:
+#   name: docker-ce
+#   state: present

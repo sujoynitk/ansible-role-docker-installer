@@ -1,0 +1,11 @@
+---
+# tasks file for docker-installer
+
+- name: Inlcude os-specific tasks
+  include_tasks: "{{ ansible_os_family | lower }}.yml"
+
+- name: enable and start docker service
+  service:
+    name: docker
+    state: started
+    enabled: yes
